@@ -33,7 +33,7 @@ void SetMine(char borad[ROWS][COLS], int row, int col)
 	{
 		int x = rand() % row + 1;
 		int y = rand() % col + 1;
-		if (borad[x][y] = '0')
+		if (borad[x][y] == '0')
 		{
 			borad[x][y] = '1';
 			count--;
@@ -49,7 +49,7 @@ void FindMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
 	int win = 0;
 	while (win < row*col - COUNT)
 	{
-		printf("请输入要排查的坐标：");
+		printf("璇疯緭鍏ヨ鎺掓煡鐨勫潗鏍囷細");
 		scanf("%d%d", &x, &y);
 		if (x >= 1 && x <= row && y >= 1 && y <= col)
 		{
@@ -58,11 +58,15 @@ void FindMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
 				if (mine[x][y] == '1')
 				{
 					mine[x][y] = '0';
-					k = rand() % row + 1;
-					l = rand() % col + 1;
-					if (mine[k][l] == '0')
+					while (1)
 					{
-						mine[k][l] = '1';
+						k = rand() % row + 1;
+						l = rand() % col + 1;
+						if (mine[k][l] == '0')
+						{
+							mine[k][l] = '1';
+							break;
+						}
 					}
 				}
 				win++;
@@ -70,7 +74,7 @@ void FindMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
 			}
 			if (mine[x][y] == '1')
 			{
-				printf("你被炸死了！\n");
+				printf("浣犺鐐告浜嗭紒\n");
 				DisplayBoard(mine, row, col);
 				break;
 			}
@@ -96,12 +100,12 @@ void FindMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
 		}
 		else
 		{
-			printf("坐标非法，请重新输入！\n");
+			printf("鍧愭爣闈炴硶锛岃閲嶆柊杈撳叆锛乗n");
 		}
 	}
 	if (win == row*col - COUNT)
 	{
-		printf("排雷成功！\n");
+		printf("鎺掗浄鎴愬姛锛乗n");
 		DisplayBoard(mine, row, col);
 	}
 }
